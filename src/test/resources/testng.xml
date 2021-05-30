@@ -4,8 +4,9 @@
     <test name="Board tests">
         <classes>
             <class name="com.mz.trello_api.board.CreateBoardTest"/>
-            <class name="com.mz.trello_api.board.CreateBoardTest"/>
-            <class name="com.mz.trello_api.board.CreateBoardTest"/>
+            <class name="com.mz.trello_api.board.DeleteBoardTest"/>
+            <class name="com.mz.trello_api.board.ModifyBoardTest"/>
+            <class name="com.mz.trello_api.board.GetBoardInfoTest"/>
         </classes>
     </test>
 </suite>
