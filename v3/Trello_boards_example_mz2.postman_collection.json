@@ -1,0 +1,463 @@
+{
+	"info": {
+		"_postman_id": "b0244ad3-da7e-4e06-a09a-d9de82bb58ce",
+		"name": "Trello_boards_example_mz2",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "initial_test_en",
+			"item": [
+				{
+					"name": "CreateBoard",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var response = JSON.parse(responseBody);\r",
+									"\r",
+									"var board_id = response.id;\r",
+									"\r",
+									"pm.collectionVariables.set(\"board_id\", board_id);\r",
+									"\r",
+									"pm.collectionVariables.set(\"board_name_created\", response.name)\r",
+									"\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Response time is less than 200ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"\r",
+									"pm.collectionVariables.set('board_name_initial', '{{$randomWord}}');\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization: OAuth oauth_consumer_key=",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Authorization",
+								"value": "OAuth oauth_consumer_key=:",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{host}}/1/boards/?name={{board_name_initial}}&key={{api-key}}&token={{token_trello}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"1",
+								"boards",
+								""
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "{{board_name_initial}}"
+								},
+								{
+									"key": "key",
+									"value": "{{api-key}}"
+								},
+								{
+									"key": "token",
+									"value": "{{token_trello}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get_Board",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 200ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+									"});\r",
+									"\r",
+									"var response = JSON.parse(responseBody);\r",
+									"\r",
+									"var board_name = response.name;\r",
+									"\r",
+									"board_send_name = pm.collectionVariables.get(\"board_name_created\");\r",
+									"\r",
+									"tests['board_name'] = board_name === board_send_name;\r",
+									"\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.collectionVariables.get('board_id');"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/1/boards/{{board_id}}?key={{api-key}}&token={{token_trello}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"1",
+								"boards",
+								"{{board_id}}"
+							],
+							"query": [
+								{
+									"key": "key",
+									"value": "{{api-key}}"
+								},
+								{
+									"key": "token",
+									"value": "{{token_trello}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ModifyBoardName",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var response = JSON.parse(responseBody);\r",
+									"\r",
+									"var board_name = response.name;\r",
+									"\r",
+									"pm.collectionVariables.set(\"board_name_updated\", response.name)\r",
+									"\r",
+									"tests['board_name'] = response.name === board_name;\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 200ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.collectionVariables.set('board_name_to_updated', '{{$randomWord}}');"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/1/boards/{{board_id}}?key={{api-key}}&token={{token_trello}}&name={{board_name_to_updated}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"1",
+								"boards",
+								"{{board_id}}"
+							],
+							"query": [
+								{
+									"key": "key",
+									"value": "{{api-key}}"
+								},
+								{
+									"key": "token",
+									"value": "{{token_trello}}"
+								},
+								{
+									"key": "name",
+									"value": "{{board_name_to_updated}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get_Board_after_modify",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var response = JSON.parse(responseBody);\r",
+									"\r",
+									"var board_name = response.name;\r",
+									"\r",
+									"board_send_name = pm.collectionVariables.get(\"board_name_updated\");\r",
+									"\r",
+									"tests['board_name'] = board_name === board_send_name;\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 200ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+									"});\r",
+									"\r",
+									"var response = JSON.parse(responseBody);\r",
+									"\r",
+									"var board_name = response.name;\r",
+									"\r",
+									"board_updated_name = pm.collectionVariables.get(\"board_name_updated\");\r",
+									"\r",
+									"tests['board_name'] = board_name === board_updated_name;"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/1/boards/{{board_id}}?key={{api-key}}&token={{token_trello}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"1",
+								"boards",
+								"{{board_id}}"
+							],
+							"query": [
+								{
+									"key": "key",
+									"value": "{{api-key}}"
+								},
+								{
+									"key": "token",
+									"value": "{{token_trello}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteBoard",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 200ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/1/boards/{{board_id}}?key={{api-key}}&token={{token_trello}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"1",
+								"boards",
+								"{{board_id}}"
+							],
+							"query": [
+								{
+									"key": "key",
+									"value": "{{api-key}}"
+								},
+								{
+									"key": "token",
+									"value": "{{token_trello}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get_Board_after_delete",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"\r",
+									"pm.test(\"Status code is 404\", function () {\r",
+									"    pm.response.to.have.status(404);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body is correct: 'resource was not found'\", function () {\r",
+									"    pm.response.to.have.body(\"The requested resource was not found.\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 200ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+									"});\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/1/boards/{{board_id}}?key={{api-key}}&token={{token_trello}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"1",
+								"boards",
+								"{{board_id}}"
+							],
+							"query": [
+								{
+									"key": "key",
+									"value": "{{api-key}}"
+								},
+								{
+									"key": "token",
+									"value": "{{token_trello}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "board_name_initial",
+			"value": null
+		},
+		{
+			"key": "board_id",
+			"value": ""
+		},
+		{
+			"key": "board_name_created",
+			"value": ""
+		},
+		{
+			"key": "board_name_updated",
+			"value": ""
+		},
+		{
+			"key": "board_name_to_updated",
+			"value": ""
+		}
+	]
+}
