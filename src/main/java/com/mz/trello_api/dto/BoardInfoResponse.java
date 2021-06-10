@@ -6,7 +6,7 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 @Generated("jsonschema2pojo")
-public class CreateNewBoardResponse {
+public class BoardInfoResponse {
 
     @SerializedName("id")
     @Expose
@@ -38,15 +38,6 @@ public class CreateNewBoardResponse {
     @SerializedName("shortUrl")
     @Expose
     private String shortUrl;
-    @SerializedName("prefs")
-    @Expose
-    private Prefs prefs;
-    @SerializedName("labelNames")
-    @Expose
-    private LabelNames labelNames;
-    @SerializedName("limits")
-    @Expose
-    private Limits limits;
 
     public String getId() {
         return id;
@@ -128,34 +119,10 @@ public class CreateNewBoardResponse {
         this.shortUrl = shortUrl;
     }
 
-    public Prefs getPrefs() {
-        return prefs;
-    }
-
-    public void setPrefs(Prefs prefs) {
-        this.prefs = prefs;
-    }
-
-    public LabelNames getLabelNames() {
-        return labelNames;
-    }
-
-    public void setLabelNames(LabelNames labelNames) {
-        this.labelNames = labelNames;
-    }
-
-    public Limits getLimits() {
-        return limits;
-    }
-
-    public void setLimits(Limits limits) {
-        this.limits = limits;
-    }
-
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append(CreateNewBoardResponse.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
+        sb.append(BoardInfoResponse.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
         sb.append("id");
         sb.append('=');
         sb.append(((this.id == null)?"<null>":this.id));
@@ -196,18 +163,6 @@ public class CreateNewBoardResponse {
         sb.append('=');
         sb.append(((this.shortUrl == null)?"<null>":this.shortUrl));
         sb.append(',');
-        sb.append("prefs");
-        sb.append('=');
-        sb.append(((this.prefs == null)?"<null>":this.prefs));
-        sb.append(',');
-        sb.append("labelNames");
-        sb.append('=');
-        sb.append(((this.labelNames == null)?"<null>":this.labelNames));
-        sb.append(',');
-        sb.append("limits");
-        sb.append('=');
-        sb.append(((this.limits == null)?"<null>":this.limits));
-        sb.append(',');
         if (sb.charAt((sb.length()- 1)) == ',') {
             sb.setCharAt((sb.length()- 1), ']');
         } else {
@@ -221,16 +176,13 @@ public class CreateNewBoardResponse {
         int result = 1;
         result = ((result* 31)+((this.descData == null)? 0 :this.descData.hashCode()));
         result = ((result* 31)+((this.pinned == null)? 0 :this.pinned.hashCode()));
-        result = ((result* 31)+((this.labelNames == null)? 0 :this.labelNames.hashCode()));
         result = ((result* 31)+((this.shortUrl == null)? 0 :this.shortUrl.hashCode()));
-        result = ((result* 31)+((this.url == null)? 0 :this.url.hashCode()));
-        result = ((result* 31)+((this.prefs == null)? 0 :this.prefs.hashCode()));
         result = ((result* 31)+((this.idEnterprise == null)? 0 :this.idEnterprise.hashCode()));
         result = ((result* 31)+((this.name == null)? 0 :this.name.hashCode()));
         result = ((result* 31)+((this.idOrganization == null)? 0 :this.idOrganization.hashCode()));
         result = ((result* 31)+((this.closed == null)? 0 :this.closed.hashCode()));
         result = ((result* 31)+((this.id == null)? 0 :this.id.hashCode()));
-        result = ((result* 31)+((this.limits == null)? 0 :this.limits.hashCode()));
+        result = ((result* 31)+((this.url == null)? 0 :this.url.hashCode()));
         result = ((result* 31)+((this.desc == null)? 0 :this.desc.hashCode()));
         return result;
     }
@@ -240,11 +192,11 @@ public class CreateNewBoardResponse {
         if (other == this) {
             return true;
         }
-        if ((other instanceof CreateNewBoardResponse) == false) {
+        if ((other instanceof BoardInfoResponse) == false) {
             return false;
         }
-        CreateNewBoardResponse rhs = ((CreateNewBoardResponse) other);
-        return ((((((((((((((this.descData == rhs.descData)||((this.descData!= null)&&this.descData.equals(rhs.descData)))&&((this.pinned == rhs.pinned)||((this.pinned!= null)&&this.pinned.equals(rhs.pinned))))&&((this.labelNames == rhs.labelNames)||((this.labelNames!= null)&&this.labelNames.equals(rhs.labelNames))))&&((this.shortUrl == rhs.shortUrl)||((this.shortUrl!= null)&&this.shortUrl.equals(rhs.shortUrl))))&&((this.url == rhs.url)||((this.url!= null)&&this.url.equals(rhs.url))))&&((this.prefs == rhs.prefs)||((this.prefs!= null)&&this.prefs.equals(rhs.prefs))))&&((this.idEnterprise == rhs.idEnterprise)||((this.idEnterprise!= null)&&this.idEnterprise.equals(rhs.idEnterprise))))&&((this.name == rhs.name)||((this.name!= null)&&this.name.equals(rhs.name))))&&((this.idOrganization == rhs.idOrganization)||((this.idOrganization!= null)&&this.idOrganization.equals(rhs.idOrganization))))&&((this.closed == rhs.closed)||((this.closed!= null)&&this.closed.equals(rhs.closed))))&&((this.id == rhs.id)||((this.id!= null)&&this.id.equals(rhs.id))))&&((this.limits == rhs.limits)||((this.limits!= null)&&this.limits.equals(rhs.limits))))&&((this.desc == rhs.desc)||((this.desc!= null)&&this.desc.equals(rhs.desc))));
+        BoardInfoResponse rhs = ((BoardInfoResponse) other);
+        return (((((((((((this.descData == rhs.descData)||((this.descData!= null)&&this.descData.equals(rhs.descData)))&&((this.pinned == rhs.pinned)||((this.pinned!= null)&&this.pinned.equals(rhs.pinned))))&&((this.shortUrl == rhs.shortUrl)||((this.shortUrl!= null)&&this.shortUrl.equals(rhs.shortUrl))))&&((this.idEnterprise == rhs.idEnterprise)||((this.idEnterprise!= null)&&this.idEnterprise.equals(rhs.idEnterprise))))&&((this.name == rhs.name)||((this.name!= null)&&this.name.equals(rhs.name))))&&((this.idOrganization == rhs.idOrganization)||((this.idOrganization!= null)&&this.idOrganization.equals(rhs.idOrganization))))&&((this.closed == rhs.closed)||((this.closed!= null)&&this.closed.equals(rhs.closed))))&&((this.id == rhs.id)||((this.id!= null)&&this.id.equals(rhs.id))))&&((this.url == rhs.url)||((this.url!= null)&&this.url.equals(rhs.url))))&&((this.desc == rhs.desc)||((this.desc!= null)&&this.desc.equals(rhs.desc))));
     }
 
 }

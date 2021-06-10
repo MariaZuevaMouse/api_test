@@ -1,7 +1,7 @@
 package com.mz.trello_api.board;
 
 import com.mz.trello_api.constants.Endpoints;
-import com.mz.trello_api.dto.CreateNewBoardResponse;
+import com.mz.trello_api.dto.BoardInfoResponse;
 import com.mz.trello_api.trello_service.TrelloServiceObj;
 import io.restassured.http.Method;
 import org.apache.http.HttpStatus;
@@ -13,7 +13,7 @@ public class DeleteBoardTest  extends BaseTest {
 
     @Test
     public void testDeleteExistingBoard() {
-        CreateNewBoardResponse newBoardResponse =
+        BoardInfoResponse newBoardResponse =
                 TrelloServiceObj.getNewBoardResponse(
                         TrelloServiceObj.requestBuilder()
                                 .setRequestMethod(Method.POST)

@@ -1,8 +1,7 @@
 package com.mz.trello_api.board;
 
 import com.mz.trello_api.constants.Endpoints;
-import com.mz.trello_api.dto.CreateNewBoardResponse;
-import com.mz.trello_api.dto.GetBoardInfoResonse;
+import com.mz.trello_api.dto.BoardInfoResponse;
 import com.mz.trello_api.trello_service.TrelloServiceObj;
 import io.restassured.http.Method;
 import org.apache.http.HttpStatus;
@@ -11,12 +10,13 @@ import org.testng.annotations.Test;
 import static com.mz.trello_api.trello_service.TrelloServiceObj.badRequestResponseSpecification;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.equalToIgnoringCase;
 
 public class GetBoardInfoTest extends BaseTest {
 
     @Test
     public void testGetExistingBoard() {
-        CreateNewBoardResponse newBoardResponse =
+        BoardInfoResponse newBoardResponse =
                 TrelloServiceObj.getNewBoardResponse(
                         TrelloServiceObj.requestBuilder()
                                 .setRequestMethod(Method.POST)
@@ -25,11 +25,11 @@ public class GetBoardInfoTest extends BaseTest {
                                 .sendRequest(Endpoints.BOARD_URI));
         boardId = newBoardResponse.getId();
 
-        GetBoardInfoResonse boardInfoResponse = TrelloServiceObj.getBoardInfoResponse(TrelloServiceObj.requestBuilder()
+        BoardInfoResponse boardInfoResponse = TrelloServiceObj.getBoardInfoResponse(TrelloServiceObj.requestBuilder()
                 .buildRequest()
                 .sendRequest(Endpoints.BOARD_URI + boardId));
 
-        assertThat(newBoardResponse.getName(), equalTo(boardInfoResponse.getName()));
+        assertThat(newBoardResponse.getName(), equalToIgnoringCase(boardInfoResponse.getName()));
         assertThat(newBoardResponse.getId(), equalTo(boardInfoResponse.getId()));
         assertThat(newBoardResponse.getUrl(), equalTo(boardInfoResponse.getUrl()));
 

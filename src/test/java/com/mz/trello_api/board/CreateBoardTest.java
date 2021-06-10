@@ -1,7 +1,7 @@
 package com.mz.trello_api.board;
 
 import com.mz.trello_api.constants.Endpoints;
-import com.mz.trello_api.dto.CreateNewBoardResponse;
+import com.mz.trello_api.dto.BoardInfoResponse;
 import com.mz.trello_api.trello_service.DataProviders;
 import com.mz.trello_api.trello_service.TrelloServiceObj;
 import io.restassured.http.Method;
@@ -10,13 +10,14 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.equalToIgnoringCase;
 
 public class CreateBoardTest extends BaseTest {
 
     @Test(dataProviderClass = DataProviders.class,
             dataProvider = "boardNames")
     public void testCreateBoard(String name) {
-        CreateNewBoardResponse newBoardResponse =
+        BoardInfoResponse newBoardResponse =
                 TrelloServiceObj.getNewBoardResponse(
                         TrelloServiceObj.requestBuilder()
                 .setRequestMethod(Method.POST)
@@ -27,7 +28,7 @@ public class CreateBoardTest extends BaseTest {
 
         boardId = newBoardResponse.getId();
 
-        assertThat(newBoardResponse.getName(), CoreMatchers.equalTo(name));
+        assertThat(newBoardResponse.getName(), equalToIgnoringCase(name));
     }
 
     @AfterMethod
@@ -40,7 +41,7 @@ public class CreateBoardTest extends BaseTest {
 
 //    @Test
 //    public void testCreateBoardEx() {
-////        CreateNewBoardResponse board =
+////        BoardInfoResponse board =
 ////        ValidatableResponse validatableResponse =
 //        RestAssured.given()
 ////                .param("key", "f48409dc2bf4433abeed098aa6e7ab68")

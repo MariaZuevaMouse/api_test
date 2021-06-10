@@ -2,9 +2,7 @@ package com.mz.trello_api.trello_service;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.mz.trello_api.dto.CreateNewBoardResponse;
-import com.mz.trello_api.dto.GetBoardInfoResonse;
-import com.mz.trello_api.dto.ModifyBoardResponse;
+import com.mz.trello_api.dto.BoardInfoResponse;
 import com.mz.trello_api.utils.TestProperties;
 import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;
@@ -83,19 +81,19 @@ public class TrelloServiceObj {
                 .build();
     }
 
-    public static CreateNewBoardResponse getNewBoardResponse(Response response){
+    public static BoardInfoResponse getNewBoardResponse(Response response){
         return new Gson().fromJson(response.asString().trim(),
-                new TypeToken<CreateNewBoardResponse>(){}.getType());
+                new TypeToken<BoardInfoResponse>(){}.getType());
     }
 
-    public static GetBoardInfoResonse getBoardInfoResponse(Response response) {
+    public static BoardInfoResponse getBoardInfoResponse(Response response) {
         return new Gson().fromJson(response.asString().trim(),
-                new TypeToken<GetBoardInfoResonse>(){}.getType());
+                new TypeToken<BoardInfoResponse>(){}.getType());
     }
 
-    public static ModifyBoardResponse getModifyBoardResponse(Response response) {
+    public static BoardInfoResponse getModifyBoardResponse(Response response) {
         return new Gson().fromJson(response.asString().trim(),
-                new TypeToken<ModifyBoardResponse>(){}.getType());
+                new TypeToken<BoardInfoResponse>(){}.getType());
     }
 
     public static ResponseSpecification goodResponseSpecification() {
